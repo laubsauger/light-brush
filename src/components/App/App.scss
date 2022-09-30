@@ -1,0 +1,22 @@
+//.App {
+//  background-color: #282c34;
+//  color: white;
+//  height: 100vh;
+//}
+
+.filter-drop-shadow {
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+}
+
+//.image-slide {
+//  animation: slide 60s linear infinite;
+//}
+
+@keyframes slide{
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-1692px, 0, 0);
+  }
+}
