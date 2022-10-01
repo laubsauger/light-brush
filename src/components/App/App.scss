@@ -8,15 +8,10 @@
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
-//.image-slide {
-//  animation: slide 60s linear infinite;
-//}
-
-@keyframes slide{
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-1692px, 0, 0);
-  }
+// collapsible cards util
+.card-header .fa {
+  transition: .3s transform ease-in-out;
+}
+.card-header .collapsed .fa {
+  transform: rotate(-90deg);
 }

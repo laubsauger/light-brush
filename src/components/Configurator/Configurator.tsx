@@ -28,17 +28,17 @@ const defaultPlayerConfig:PlayerConfig = {
 }
 
 
-const slideKeyFrames = (imageWidth:number) => keyframes`
+const slideKeyFrames = (strokeWidth:number, imageWidth:number) => keyframes`
     0% {
       transform: translate3d(0, 0, 0);
     }
     100% {
-      transform: translate3d(-${imageWidth/2}px, 0, 0);
+      transform: translate3d(-${(imageWidth)/2}px, 0, 0);
     }
   `;
 
-const SlideAnimationImg = styled('img')<{imageWidth: number, duration: number}>`
-    animation : ${props => slideKeyFrames(props.imageWidth)} ${props => props.duration}s linear;
+const SlideAnimation = styled('div')<{strokeWidth:number, imageWidth:number, duration:number}>`
+    animation : ${props => slideKeyFrames(props.strokeWidth, props.imageWidth)} ${props => props.duration}s linear;
     animation-iteration-count: infinite;
   `;
 
@@ -141,32 +141,32 @@ function Configurator(props:Props) {
             <Card.Body>
               <Row>
                 <Col>
-                  <div className="mb-2"><span className="text-muted">mode:</span> { config.mode }</div>
+                  <div className="mb-3"><span className="text-muted">mode:</span> { config.mode }</div>
                 </Col>
                 <hr/>
               </Row>
 
-              <Row>
-                <Col>
-                  <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>
-                  <div className="mb-2"><span className="text-muted">screen height:</span> { screenHeight }</div>
-                  <div className="mb-2"><span className="text-muted">screen ar:</span> { (screenWidth/screenHeight).toFixed(3) }</div>
-                </Col>
-                { config.mode === 'image' && config.image &&
-                  <Col>
-                    <div className="mb-2"><span className="text-muted">img width:</span> { config.image.width }</div>
-                    <div className="mb-2"><span className="text-muted">img height:</span> { config.image.height }</div>
-                    <div className="mb-2"><span className="text-muted">fit width:</span> { Math.round(config.image.fitWidth) }</div>
-                    <div className="mb-2"><span className="text-muted">fit height:</span> { config.image.fitHeight }</div>
-                    <div className="mb-2"><span className="text-muted">img ar:</span> { (config.image.aspectRatio).toFixed(3) }</div>
-                  </Col>
-                }
-                <hr/>
-              </Row>
+              {/*<Row>*/}
+              {/*  <Col>*/}
+              {/*    <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>*/}
+              {/*    <div className="mb-2"><span className="text-muted">screen height:</span> { screenHeight }</div>*/}
+              {/*    <div className="mb-2"><span className="text-muted">screen ar:</span> { (screenWidth/screenHeight).toFixed(3) }</div>*/}
+              {/*  </Col>*/}
+              {/*  { config.mode === 'image' && config.image &&*/}
+              {/*    <Col>*/}
+              {/*      <div className="mb-2"><span className="text-muted">img width:</span> { config.image.width }</div>*/}
+              {/*      <div className="mb-2"><span className="text-muted">img height:</span> { config.image.height }</div>*/}
+              {/*      <div className="mb-2"><span className="text-muted">fit width:</span> { Math.round(config.image.fitWidth) }</div>*/}
+              {/*      <div className="mb-2"><span className="text-muted">fit height:</span> { config.image.fitHeight }</div>*/}
+              {/*      <div className="mb-2"><span className="text-muted">img ar:</span> { (config.image.aspectRatio).toFixed(3) }</div>*/}
+              {/*    </Col>*/}
+              {/*  }*/}
+              {/*  <hr/>*/}
+              {/*</Row>*/}
 
               {/*<div>viewport/stroke size</div>*/}
               <Row>
-                <Col xs={12}>
+                <Col xs={12} className="mb-3">
                   <RangeSlider label={'stroke width'}
                                min={1}
                                max={screenWidth}
@@ -182,7 +182,7 @@ function Configurator(props:Props) {
               <Row>
                 { config.mode === 'static' ?
                   <>
-                    <Col xs={12}>
+                    <Col xs={12} className="mb-3">
                       <RangeSlider label={'duration'}
                                    min={0}
                                    max={120}
@@ -194,7 +194,7 @@ function Configurator(props:Props) {
                   </>
                   :
                   <>
-                    <Col xs={6}>
+                    <Col xs={6} className="mb-3">
                       <RangeSlider label={'speed'}
                                    min={0}
                                    max={1200}
@@ -204,10 +204,16 @@ function Configurator(props:Props) {
                       />
                     </Col>
                     { config.image &&
+                      <>
                         <Col xs={6}>
                           <span className="text-muted">duration:</span> { ((config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000).toFixed(2) } sec
                         </Col>
+                      </>
                     }
+                    <Col xs={12} className="mb-3">
+                      <div>loop</div>
+                      <div>none, once/n-times, infinite</div>
+                    </Col>
                   </>
                 }
                 <hr/>
@@ -215,7 +221,7 @@ function Configurator(props:Props) {
 
               <div>blackout</div>
               <Row>
-                <Col xs={6}>
+                <Col xs={6} className="mb-3">
                   <RangeSlider label={'before'}
                                min={0}
                                max={30}
@@ -224,7 +230,7 @@ function Configurator(props:Props) {
                                onUpdate={handleBlackoutBeforeChange}
                   />
                 </Col>
-                <Col xs={6}>
+                <Col xs={6} className="mb-3">
                   <RangeSlider label={'after'}
                                min={0}
                                max={30}
@@ -265,16 +271,20 @@ function Configurator(props:Props) {
                       { config.mode === 'image' && config.image ?
                         <div className="position-relative h-100">
                           { runPreviewSimulation ?
-                            <SlideAnimationImg duration={(config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000}
-                                               imageWidth={config.image.fitWidth}
-                                               src={config.image.file.objectURL}
-                                               alt="img"
-                                               style={{ height: '100%' }}
-                            />
+                            <div className="position-relative h-100">
+                              <SlideAnimation duration={(config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000}
+                                              strokeWidth={config.strokeWidth}
+                                              imageWidth={config.image.fitWidth}
+                                              className="d-flex h-100"
+                              >
+                                <img src={config.image.file.objectURL} alt="img" className="h-100"
+                                />
+                                <img src={config.image.file.objectURL} alt="img" className="h-100"
+                                />
+                              </SlideAnimation>
+                            </div>
                             :
-                            <img src={config.image.file.objectURL}
-                                 alt="img"
-                                 style={{ height: '100%' }}
+                            <img src={config.image.file.objectURL} alt="img" className="h-100"
                             />
                           }
                         </div>
@@ -292,18 +302,5 @@ function Configurator(props:Props) {
     </div>
   );
 }
-
-//.image-slide {
-//  animation: slide 60s linear infinite;
-//}
-
-// @keyframes slide{
-//   0% {
-//     transform: translate3d(0, 0, 0);
-//   }
-//   100% {
-//     transform: translate3d(-1692px, 0, 0);
-// }
-// }
 
 export default Configurator;
