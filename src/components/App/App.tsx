@@ -41,7 +41,9 @@ function App() {
             <Col xs={6}>
               <div className="d-grid gap-2 mt-3">
                 <Button variant="primary"
-                        onClick={() => setPlay(true)}
+                        onClick={() => {
+                          setPlay(true);
+                        }}
                         disabled={!config?.image && !config?.staticColor}>
                   Start
                 </Button>

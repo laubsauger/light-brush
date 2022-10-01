@@ -5,7 +5,7 @@ import RangeSlider from "./Range/Range";
 import ColorPicker from "./ColorPicker/ColorPicker";
 import FileInput from "./FileInput/FileInput";
 import useDimensions from "../../hooks/useDimensions";
-import styled, {keyframes} from "styled-components";
+import SlideAnimation from "../styled/SlideAnimation";
 
 type Props = {
   onChanged: any,
@@ -26,21 +26,6 @@ const defaultPlayerConfig:PlayerConfig = {
   speedMs: 2,
   showCountdown: false,
 }
-
-
-const slideKeyFrames = (strokeWidth:number, imageWidth:number) => keyframes`
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    100% {
-      transform: translate3d(-${(imageWidth)/2}px, 0, 0);
-    }
-  `;
-
-const SlideAnimation = styled('div')<{strokeWidth:number, imageWidth:number, duration:number}>`
-    animation : ${props => slideKeyFrames(props.strokeWidth, props.imageWidth)} ${props => props.duration}s linear;
-    animation-iteration-count: infinite;
-  `;
 
 function Configurator(props:Props) {
   const { onChanged } = props;
@@ -197,7 +182,7 @@ function Configurator(props:Props) {
                     <Col xs={6} className="mb-3">
                       <RangeSlider label={'speed'}
                                    min={0}
-                                   max={1200}
+                                   max={250}
                                    initValue={defaultPlayerConfig.speedMs}
                                    unit={'ms'}
                                    onUpdate={handleSpeedChange}
@@ -274,7 +259,7 @@ function Configurator(props:Props) {
                             <div className="position-relative h-100">
                               <SlideAnimation duration={(config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000}
                                               strokeWidth={config.strokeWidth}
-                                              imageWidth={config.image.fitWidth}
+                                              imageWidth={config.image.fitWidth/2}
                                               className="d-flex h-100"
                               >
                                 <img src={config.image.file.objectURL} alt="img" className="h-100"
