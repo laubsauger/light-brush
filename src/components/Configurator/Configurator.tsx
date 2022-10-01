@@ -12,17 +12,16 @@ type Props = {
 }
 
 const defaultPlayerConfig:PlayerConfig = {
-  mode: 'static',
+  mode: 'image',
   staticColor: '#8400db',
   staticDurationSec: 5,
-  strokeWidth: 10,
+  strokeWidth: 5,
   image: null,
   keepImageAspectRatio: true,
   viewportWidth: 100,
   viewportHeight: 100,
   blackoutBeforeDurationSec: 2,
   blackoutAfterDurationSec: 2,
-  playDurationMs: 1000,
   speedMs: 2,
   showCountdown: false,
 }
@@ -93,17 +92,12 @@ function Configurator(props:Props) {
             <Card.Header>Mode</Card.Header>
             <Card.Body>
               <Tabs
-                defaultActiveKey="static"
+                defaultActiveKey={defaultPlayerConfig.mode}
                 id="justify-tab-example"
                 className="mb-3"
                 justify
                 onSelect={(tabKey) => setConfig({ ...config, mode: tabKey === 'image' ? 'image' : 'static' })}
               >
-                <Tab eventKey="static" title="Static">
-                  <ColorPicker initValue={defaultPlayerConfig.staticColor}
-                               onUpdate={handleStaticColorChange}
-                  />
-                </Tab>
                 <Tab eventKey="image" title="Image">
                   <FileInput onChange={handleImageChange}/>
                   {/*<Form.Switch type="switch"*/}
@@ -113,6 +107,11 @@ function Configurator(props:Props) {
                   {/*             onChange={handleKeepImageAspectRatio}*/}
                   {/*             className="mt-3"*/}
                   {/*/>*/}
+                </Tab>
+                <Tab eventKey="static" title="Static">
+                  <ColorPicker initValue={defaultPlayerConfig.staticColor}
+                               onUpdate={handleStaticColorChange}
+                  />
                 </Tab>
               </Tabs>
             </Card.Body>
@@ -179,7 +178,7 @@ function Configurator(props:Props) {
                   </>
                   :
                   <>
-                    <Col xs={6} className="mb-3">
+                    <Col xs={12} className="mb-3">
                       <RangeSlider label={'speed'}
                                    min={0}
                                    max={250}
@@ -190,7 +189,7 @@ function Configurator(props:Props) {
                     </Col>
                     { config.image &&
                       <>
-                        <Col xs={6}>
+                        <Col xs={12}>
                           <span className="text-muted">duration:</span> { ((config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000).toFixed(2) } sec
                         </Col>
                       </>

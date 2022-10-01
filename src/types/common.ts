@@ -9,7 +9,6 @@ export type PlayerConfig = {
   viewportHeight: number,
   blackoutBeforeDurationSec: number,
   blackoutAfterDurationSec: number,
-  playDurationMs: number,
   speedMs: number,
   showCountdown: boolean,
 }
