@@ -38,7 +38,8 @@ const slideKeyFrames = (imageWidth:number) => keyframes`
   `;
 
 const SlideAnimationImg = styled('img')<{imageWidth: number, duration: number}>`
-    animation : ${props => slideKeyFrames(props.imageWidth)} ${props => props.duration}s linear
+    animation : ${props => slideKeyFrames(props.imageWidth)} ${props => props.duration}s linear;
+    animation-iteration-count: infinite;
   `;
 
 function Configurator(props:Props) {
@@ -260,7 +261,7 @@ function Configurator(props:Props) {
               <div className="d-flex justify-content-center align-items-center">
                 <div style={{ width: screenWidth / 2, height: screenHeight / 2 }}>
                   <div className="w-100 h-100 rounded border-1 border filter-drop-shadow d-flex justify-content-center" style={{ background: "#000" }}>
-                    <div className="h-100 overflow-hidden border-top-0 border-bottom-0" style={{ width: (config.strokeWidth / 2) + 2, border: "1px dashed #333" }}>
+                    <div className="h-100 overflow-hidden" style={{ width: (config.strokeWidth / 2) }}>
                       { config.mode === 'image' && config.image ?
                         <div className="position-relative h-100">
                           { runPreviewSimulation ?
