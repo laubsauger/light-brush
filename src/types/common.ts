@@ -10,7 +10,8 @@ export type PlayerConfig = {
   blackoutBeforeDurationSec: number,
   blackoutAfterDurationSec: number,
   speedMs: number,
-  showCountdown: boolean,
+  countdown: boolean,
+  loop: boolean,
 }
 
 export type ImageFile = {

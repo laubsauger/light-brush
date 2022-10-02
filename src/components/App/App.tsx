@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './App.scss';
 import Configurator from "../Configurator/Configurator";
 import Player from "../Player/Player";
 import { PlayerConfig } from "../../types/common";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 
 const toggleFullscreen = () => {
   const el = window.document.documentElement;
@@ -44,18 +44,16 @@ function App() {
                         onClick={() => {
                           setPlay(true);
                         }}
-                        disabled={!config?.image && !config?.staticColor}>
+                        disabled={config?.mode === 'image' && !config?.image}>
                   Start
                 </Button>
               </div>
             </Col>
 
             <Col xs={6} className="mt-3 d-flex justify-content-end align-items-center">
-              <Form.Switch type="switch"
-                           id="fullscreen-switch"
-                           label="Fullscreen"
-                           onChange={() => toggleFullscreen()}
-              />
+              <Button variant="outline-secondary"  onClick={() => toggleFullscreen()}>
+                Fullscreen
+              </Button>
             </Col>
           </Row>
 
