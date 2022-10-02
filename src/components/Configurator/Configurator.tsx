@@ -123,135 +123,139 @@ function Configurator(props:Props) {
           </Card>
         </Col>
       </Row>
-      <Row className="mt-3">
-        <Col>
-          <Card>
-            <Card.Header>Options</Card.Header>
-            <Card.Body>
-              {/*<Row>*/}
-              {/*  <Col xs={6}>*/}
-              {/*    <div className="mb-3"><span className="text-muted">mode:</span> { config.mode }</div>*/}
-              {/*  </Col>*/}
-              {/*  <hr/>*/}
-              {/*</Row>*/}
 
-              {/*<Row>*/}
-              {/*  <Col>*/}
-              {/*    <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>*/}
-              {/*    <div className="mb-2"><span className="text-muted">screen height:</span> { screenHeight }</div>*/}
-              {/*    <div className="mb-2"><span className="text-muted">screen ar:</span> { (screenWidth/screenHeight).toFixed(3) }</div>*/}
-              {/*  </Col>*/}
-              {/*  { config.mode === 'image' && config.image &&*/}
-              {/*    <Col>*/}
-              {/*      <div className="mb-2"><span className="text-muted">img width:</span> { config.image.width }</div>*/}
-              {/*      <div className="mb-2"><span className="text-muted">img height:</span> { config.image.height }</div>*/}
-              {/*      <div className="mb-2"><span className="text-muted">fit width:</span> { Math.round(config.image.fitWidth) }</div>*/}
-              {/*      <div className="mb-2"><span className="text-muted">fit height:</span> { config.image.fitHeight }</div>*/}
-              {/*      <div className="mb-2"><span className="text-muted">img ar:</span> { (config.image.aspectRatio).toFixed(3) }</div>*/}
-              {/*    </Col>*/}
-              {/*  }*/}
-              {/*  <hr/>*/}
-              {/*</Row>*/}
+      { ((config.mode === 'image' && config.image) || (config.mode === 'static' && config.staticColor)) &&
+        <>
+          <Row className="mt-3">
+            <Col>
+              <Card>
+                <Card.Header>Options</Card.Header>
+                <Card.Body>
+                  {/*<Row>*/}
+                  {/*  <Col xs={6}>*/}
+                  {/*    <div className="mb-3"><span className="text-muted">mode:</span> { config.mode }</div>*/}
+                  {/*  </Col>*/}
+                  {/*  <hr/>*/}
+                  {/*</Row>*/}
 
-              {/*<div>viewport/stroke size</div>*/}
-              <Row>
-                <Col xs={12} className="mb-3">
-                  <NumberInput label={'stroke'}
-                               min={1}
-                               max={screenWidth}
-                               initValue={defaultPlayerConfig.strokeWidth}
-                               unit={'px'}
-                               onUpdate={handleStrokeWidthChange}
-                  />
-                </Col>
-                <hr/>
-              </Row>
+                  {/*<Row>*/}
+                  {/*  <Col>*/}
+                  {/*    <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>*/}
+                  {/*    <div className="mb-2"><span className="text-muted">screen height:</span> { screenHeight }</div>*/}
+                  {/*    <div className="mb-2"><span className="text-muted">screen ar:</span> { (screenWidth/screenHeight).toFixed(3) }</div>*/}
+                  {/*  </Col>*/}
+                  {/*  { config.mode === 'image' && config.image &&*/}
+                  {/*    <Col>*/}
+                  {/*      <div className="mb-2"><span className="text-muted">img width:</span> { config.image.width }</div>*/}
+                  {/*      <div className="mb-2"><span className="text-muted">img height:</span> { config.image.height }</div>*/}
+                  {/*      <div className="mb-2"><span className="text-muted">fit width:</span> { Math.round(config.image.fitWidth) }</div>*/}
+                  {/*      <div className="mb-2"><span className="text-muted">fit height:</span> { config.image.fitHeight }</div>*/}
+                  {/*      <div className="mb-2"><span className="text-muted">img ar:</span> { (config.image.aspectRatio).toFixed(3) }</div>*/}
+                  {/*    </Col>*/}
+                  {/*  }*/}
+                  {/*  <hr/>*/}
+                  {/*</Row>*/}
 
-              <Row>
-                { config.mode === 'static' ?
-                  <>
+                  {/*<div>viewport/stroke size</div>*/}
+                  <Row>
                     <Col xs={12} className="mb-3">
-                      <NumberInput label={'duration'}
-                                   min={0}
-                                   max={120}
-                                   initValue={defaultPlayerConfig.staticDurationSec}
-                                   unit={'sec'}
-                                   onUpdate={handleStaticDurationSecChange}
+                      <NumberInput label={'stroke'}
+                                   min={1}
+                                   max={screenWidth}
+                                   initValue={defaultPlayerConfig.strokeWidth}
+                                   unit={'px'}
+                                   onUpdate={handleStrokeWidthChange}
                       />
                     </Col>
-                  </>
-                  :
-                  <>
-                    <Col xs={12} className="mb-3">
-                      <NumberInput label={'speed'}
-                                   min={0}
-                                   max={250}
-                                   initValue={defaultPlayerConfig.speedMs}
-                                   unit={'ms'}
-                                   onUpdate={handleSpeedChange}
-                      />
-                    </Col>
-                    { config.image &&
+                    <hr/>
+                  </Row>
+
+                  <Row>
+                    { config.mode === 'static' ?
                       <>
-                        <Col xs={12}>
-                          <span className="text-muted">duration:</span> { ((config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000).toFixed(2) } sec
+                        <Col xs={12} className="mb-3">
+                          <NumberInput label={'duration'}
+                                       min={0}
+                                       max={120}
+                                       initValue={defaultPlayerConfig.staticDurationSec}
+                                       unit={'sec'}
+                                       onUpdate={handleStaticDurationSecChange}
+                          />
                         </Col>
                       </>
+                      :
+                      <>
+                        <Col xs={12} className="mb-3">
+                          <NumberInput label={'speed'}
+                                       min={0}
+                                       max={250}
+                                       initValue={defaultPlayerConfig.speedMs}
+                                       unit={'ms'}
+                                       onUpdate={handleSpeedChange}
+                          />
+                        </Col>
+                        { config.image &&
+                        <>
+                          <Col xs={12}>
+                            <span className="text-muted">duration:</span> { ((config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000).toFixed(2) } sec
+                          </Col>
+                        </>
+                        }
+                      </>
                     }
-                  </>
-                }
-                <hr/>
-              </Row>
+                    <hr/>
+                  </Row>
 
-              <Row>
-                <Col xs={12} className="mb-3">
-                  <NumberInput label={'before'}
-                               min={0}
-                               max={30}
-                               initValue={defaultPlayerConfig.blackoutBeforeDurationSec}
-                               unit={'sec'}
-                               onUpdate={handleBlackoutBeforeChange}
-                  />
-                </Col>
-                <Col xs={12} className="mb-3">
-                  <NumberInput label={'after'}
-                               min={0}
-                               max={30}
-                               initValue={defaultPlayerConfig.blackoutAfterDurationSec}
-                               unit={'sec'}
-                               onUpdate={handleBlackoutAfterChange}
-                  />
-                </Col>
-                <hr/>
-              </Row>
-              <Row>
-                <Col xs={6}>
-                  <Form.Switch type="switch"
-                               id="loop-switch"
-                               label="Loop"
-                               checked={config.loop}
-                               onChange={handleLoopChange}
-                  />
-                </Col>
-                <Col xs={6}>
-                  <Form.Switch type="switch"
-                               id="countdown-switch"
-                               label="Countdown"
-                               checked={config.countdown}
-                               onChange={handleCountdownChange}
-                  />
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-
-      <Row className="mt-3">
-        <Col>
-          <Preview config={config} />
-        </Col>
-      </Row>
+                  <Row>
+                    <Col xs={12} className="mb-3">
+                      <NumberInput label={'before'}
+                                   min={0}
+                                   max={30}
+                                   initValue={defaultPlayerConfig.blackoutBeforeDurationSec}
+                                   unit={'sec'}
+                                   onUpdate={handleBlackoutBeforeChange}
+                      />
+                    </Col>
+                    <Col xs={12} className="mb-3">
+                      <NumberInput label={'after'}
+                                   min={0}
+                                   max={30}
+                                   initValue={defaultPlayerConfig.blackoutAfterDurationSec}
+                                   unit={'sec'}
+                                   onUpdate={handleBlackoutAfterChange}
+                      />
+                    </Col>
+                    <hr/>
+                  </Row>
+                  <Row>
+                    <Col xs={6}>
+                      <Form.Switch type="switch"
+                                   id="loop-switch"
+                                   label="Loop"
+                                   checked={config.loop}
+                                   onChange={handleLoopChange}
+                      />
+                    </Col>
+                    <Col xs={6}>
+                      <Form.Switch type="switch"
+                                   id="countdown-switch"
+                                   label="Countdown"
+                                   checked={config.countdown}
+                                   onChange={handleCountdownChange}
+                      />
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+          <Row className="mt-3">
+            <Col>
+              <Preview config={config} />
+            </Col>
+          </Row>
+        </>
+      }
     </div>
   );
 }

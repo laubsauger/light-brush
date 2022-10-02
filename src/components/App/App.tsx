@@ -39,15 +39,17 @@ function App() {
 
           <Row>
             <Col xs={6}>
-              <div className="d-grid gap-2 mt-3">
-                <Button variant="primary"
-                        onClick={() => {
-                          setPlay(true);
-                        }}
-                        disabled={config?.mode === 'image' && !config?.image}>
-                  Start
-                </Button>
-              </div>
+              { (config && ((config.mode === 'static' && config.staticColor) || (config.mode === 'image' && config.image))) &&
+                <div className="d-grid gap-2 mt-3">
+                  <Button variant="primary"
+                          onClick={() => {
+                            setPlay(true);
+                          }}
+                          disabled={config?.mode === 'image' && !config?.image}>
+                    Start
+                  </Button>
+                </div>
+              }
             </Col>
 
             <Col xs={6} className="mt-3 d-flex justify-content-end align-items-center">
