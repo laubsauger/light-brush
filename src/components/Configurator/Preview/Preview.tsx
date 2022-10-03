@@ -1,6 +1,6 @@
 import {Card, Form} from "react-bootstrap";
 import SlideAnimation from "../../styled/SlideAnimation";
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {PlayerConfig} from "../../../types/common";
 import useDimensions from "../../../hooks/useDimensions";
 
@@ -12,6 +12,27 @@ function Preview(props:Props) {
   const { config } = props;
   const { screenWidth, screenHeight } = useDimensions();
   const [ runPreviewSimulation, setRunPreviewSimulation ] = useState<boolean>(false);
+  const [ stopTimer, setStopTimer ] = useState<any>();
+
+  const handleRunPreviewSimulation = useCallback(() => {
+    if (stopTimer && runPreviewSimulation) {
+      console.log('stopping preview');
+      clearTimeout(stopTimer);
+    }
+
+    setRunPreviewSimulation(!runPreviewSimulation);
+
+    if (config.image && !config.loop && !runPreviewSimulation) {
+      const stopTimerId = setTimeout(() => {
+          console.log('stopping preview');
+          setRunPreviewSimulation(false)
+        },
+        (config.image?.fitWidth/config.strokeWidth * config.speedMs)
+      );
+
+      setStopTimer(stopTimerId);
+    }
+  }, [stopTimer, setStopTimer, config, runPreviewSimulation, setRunPreviewSimulation])
 
   return (
     <Card>
@@ -22,7 +43,7 @@ function Preview(props:Props) {
                      label="Simulate"
                      disabled={config.mode === 'image' && !config.image}
                      checked={runPreviewSimulation}
-                     onChange={() => setRunPreviewSimulation(!runPreviewSimulation)}
+                     onChange={handleRunPreviewSimulation}
         />
 
         <div className="d-flex justify-content-center align-items-center">

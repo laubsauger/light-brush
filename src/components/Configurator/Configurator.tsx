@@ -29,7 +29,7 @@ const defaultPlayerConfig:PlayerConfig = {
 
 function Configurator(props:Props) {
   const { onChanged } = props;
-  const { screenWidth } = useDimensions();
+  const { screenWidth, screenHeight } = useDimensions();
 
   const [ config, setConfig ] = useState<PlayerConfig>(defaultPlayerConfig);
 
@@ -138,23 +138,23 @@ function Configurator(props:Props) {
                   {/*  <hr/>*/}
                   {/*</Row>*/}
 
-                  {/*<Row>*/}
-                  {/*  <Col>*/}
-                  {/*    <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>*/}
-                  {/*    <div className="mb-2"><span className="text-muted">screen height:</span> { screenHeight }</div>*/}
-                  {/*    <div className="mb-2"><span className="text-muted">screen ar:</span> { (screenWidth/screenHeight).toFixed(3) }</div>*/}
-                  {/*  </Col>*/}
-                  {/*  { config.mode === 'image' && config.image &&*/}
-                  {/*    <Col>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">img width:</span> { config.image.width }</div>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">img height:</span> { config.image.height }</div>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">fit width:</span> { Math.round(config.image.fitWidth) }</div>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">fit height:</span> { config.image.fitHeight }</div>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">img ar:</span> { (config.image.aspectRatio).toFixed(3) }</div>*/}
-                  {/*    </Col>*/}
-                  {/*  }*/}
-                  {/*  <hr/>*/}
-                  {/*</Row>*/}
+                  <Row>
+                    <Col>
+                      <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>
+                      <div className="mb-2"><span className="text-muted">screen height:</span> { screenHeight }</div>
+                      <div className="mb-2"><span className="text-muted">screen ar:</span> { (screenWidth/screenHeight).toFixed(3) }</div>
+                    </Col>
+                    { config.mode === 'image' && config.image &&
+                      <Col>
+                        <div className="mb-2"><span className="text-muted">img width:</span> { config.image.width }</div>
+                        <div className="mb-2"><span className="text-muted">img height:</span> { config.image.height }</div>
+                        <div className="mb-2"><span className="text-muted">fit width:</span> { Math.round(config.image.fitWidth) }</div>
+                        <div className="mb-2"><span className="text-muted">fit height:</span> { config.image.fitHeight }</div>
+                        <div className="mb-2"><span className="text-muted">img ar:</span> { (config.image.aspectRatio).toFixed(3) }</div>
+                      </Col>
+                    }
+                    <hr/>
+                  </Row>
 
                   {/*<div>viewport/stroke size</div>*/}
                   <Row>
@@ -167,7 +167,6 @@ function Configurator(props:Props) {
                                    onUpdate={handleStrokeWidthChange}
                       />
                     </Col>
-                    <hr/>
                   </Row>
 
                   <Row>
@@ -195,11 +194,11 @@ function Configurator(props:Props) {
                           />
                         </Col>
                         { config.image &&
-                        <>
-                          <Col xs={12}>
-                            <span className="text-muted">duration:</span> { ((config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000).toFixed(2) } sec
-                          </Col>
-                        </>
+                          <>
+                            <Col xs={12} className="mb-3">
+                              <span className="text-muted">duration</span> { ((config.image?.fitWidth/config.strokeWidth * config.speedMs) / 1000).toFixed(2) } sec
+                            </Col>
+                          </>
                         }
                       </>
                     }

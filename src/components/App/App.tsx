@@ -58,15 +58,15 @@ function App() {
               </Button>
             </Col>
           </Row>
-
-          { play && config ?
-            <Player config={config}
-                    onStarted={() => console.log('onStart')}
-                    onEnded={() => setPlay(false)}
-            />
-            : null
-          }
         </Container>
+
+        { play && config ?
+          <Player config={config}
+                  onStarted={() => console.log('onStart')}
+                  onEnded={() => setPlay(false)}
+          />
+          : null
+        }
       </main>
     </div>
   );
