@@ -117,23 +117,23 @@ function Configurator(props:Props) {
               <Card>
                 <Card.Header>Options</Card.Header>
                 <Card.Body>
-                  {/*<Row>*/}
-                  {/*  <Col>*/}
-                  {/*    <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>*/}
-                  {/*    <div className="mb-2"><span className="text-muted">screen height:</span> { screenHeight }</div>*/}
-                  {/*    <div className="mb-2"><span className="text-muted">screen ar:</span> { (screenWidth/screenHeight).toFixed(3) }</div>*/}
-                  {/*  </Col>*/}
-                  {/*  { config.mode === 'image' && config.image &&*/}
-                  {/*    <Col>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">img width:</span> { config.image.width }</div>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">img height:</span> { config.image.height }</div>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">fit width:</span> { Math.round(config.image.fitWidth) }</div>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">fit height:</span> { config.image.fitHeight }</div>*/}
-                  {/*      <div className="mb-2"><span className="text-muted">img ar:</span> { (config.image.aspectRatio).toFixed(3) }</div>*/}
-                  {/*    </Col>*/}
-                  {/*  }*/}
-                  {/*  <hr/>*/}
-                  {/*</Row>*/}
+                  <Row>
+                    <Col>
+                      <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>
+                      <div className="mb-2"><span className="text-muted">screen height:</span> { screenHeight }</div>
+                      <div className="mb-2"><span className="text-muted">screen ar:</span> { (screenWidth/screenHeight).toFixed(3) }</div>
+                    </Col>
+                    { config.mode === 'image' && config.image &&
+                      <Col>
+                        <div className="mb-2"><span className="text-muted">img width:</span> { config.image.width }</div>
+                        <div className="mb-2"><span className="text-muted">img height:</span> { config.image.height }</div>
+                        <div className="mb-2"><span className="text-muted">fit width:</span> { Math.round(config.image.fitWidth) }</div>
+                        <div className="mb-2"><span className="text-muted">fit height:</span> { config.image.fitHeight }</div>
+                        <div className="mb-2"><span className="text-muted">img ar:</span> { (config.image.aspectRatio).toFixed(3) }</div>
+                      </Col>
+                    }
+                    <hr/>
+                  </Row>
 
                   <Row>
                     <Col xs={12} className="mb-3">
