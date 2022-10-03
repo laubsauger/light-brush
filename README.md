@@ -1,5 +1,6 @@
-![screen1.png](screen1.png) ![result1.jpg](result1.jpg)
-
+<img src="screen1.png" alt="screen1" style="width:200px;"/>
+<img src="result1.jpg" alt="result1" style="width:200px;"/>
+ 
 ### Todo
 
 - [ ] implement down-up scaling
