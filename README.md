@@ -1,5 +1,5 @@
-<img src="screen1.png" alt="screen1" style="width:200px;"/>
-<img src="result1.jpg" alt="result1" style="width:200px;"/>
+<img src="screen1.png" alt="screen1" width="200"/>
+<img src="result1.jpg" alt="result1" width="200"/>
  
 ### Todo
 
