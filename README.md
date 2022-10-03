@@ -1,3 +1,5 @@
+![screen1.png](screen1.png)
+
 ### Todo
 
 - [ ] tap screen to stop playback and move to "blackout after"
