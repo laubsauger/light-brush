@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/light-brush/static/css/main.1c00de43.css",
+    "main.js": "/light-brush/static/js/main.fc510105.js",
+    "static/js/787.a8b2aaa3.chunk.js": "/light-brush/static/js/787.a8b2aaa3.chunk.js",
+    "index.html": "/light-brush/index.html",
+    "main.1c00de43.css.map": "/light-brush/static/css/main.1c00de43.css.map",
+    "main.fc510105.js.map": "/light-brush/static/js/main.fc510105.js.map",
+    "787.a8b2aaa3.chunk.js.map": "/light-brush/static/js/787.a8b2aaa3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c00de43.css",
+    "static/js/main.fc510105.js"
+  ]
+}
