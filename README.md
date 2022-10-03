@@ -1,6 +1,7 @@
-<img src="screen1.png" alt="screen1" width="200"/>
-<img src="result1.jpg" alt="result1" width="200"/>
- 
+App             |  Result
+:-------------------------:|:-------------------------:
+![screen1.png](screen1.png)  |  ![result1.jpg](result1.jpg)
+
 ### Todo
 
 - [ ] implement down-up scaling
