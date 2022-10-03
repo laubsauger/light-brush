@@ -25,12 +25,18 @@ function Preview(props:Props) {
     if (config.image && !config.loop && !runPreviewSimulation) {
       const stopTimerId = setTimeout(() => {
           console.log('stopping preview');
-          setRunPreviewSimulation(false)
+          setRunPreviewSimulation(false);
         },
         (config.image?.fitWidth/config.strokeWidth * config.speedMs)
       );
 
       setStopTimer(stopTimerId);
+    }
+
+    return () => {
+      if (stopTimer) {
+        clearTimeout(stopTimer);
+      }
     }
   }, [stopTimer, setStopTimer, config, runPreviewSimulation, setRunPreviewSimulation])
 

@@ -4,7 +4,6 @@ export type PlayerConfig = {
   staticDurationSec: number,
   strokeWidth: number,
   image: ImageFile | null,
-  keepImageAspectRatio: boolean,
   viewportWidth: number,
   viewportHeight: number,
   blackoutBeforeDurationSec: number,

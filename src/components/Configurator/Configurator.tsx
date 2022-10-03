@@ -17,14 +17,13 @@ const defaultPlayerConfig:PlayerConfig = {
   staticDurationSec: 5,
   strokeWidth: 5,
   image: null,
-  keepImageAspectRatio: true,
   viewportWidth: 100,
   viewportHeight: 100,
   blackoutBeforeDurationSec: 2,
   blackoutAfterDurationSec: 2,
   speedMs: 2,
   countdown: false,
-  loop: true,
+  loop: false,
 }
 
 function Configurator(props:Props) {
@@ -32,7 +31,6 @@ function Configurator(props:Props) {
   const { screenWidth, screenHeight } = useDimensions();
 
   const [ config, setConfig ] = useState<PlayerConfig>(defaultPlayerConfig);
-
 
   const handleImageChange = useCallback((newVal:ImageFile) => {
     console.log('handleImageChange', newVal)
@@ -79,11 +77,6 @@ function Configurator(props:Props) {
     setConfig({ ...config, loop: !config.loop });
   }, [ config ]);
 
-  // const handleKeepImageAspectRatio = useCallback(() => {
-  //   console.log('handleKeepImageAspectRatio', !config.keepImageAspectRatio)
-  //   setConfig({ ...config, keepImageAspectRatio: !config.keepImageAspectRatio });
-  // }, [ config ]);
-
   useEffect(() => {
     console.log('useEffect', config);
     onChanged(config);
@@ -105,13 +98,6 @@ function Configurator(props:Props) {
               >
                 <Tab eventKey="image" title="Image">
                   <FileInput onChange={handleImageChange}/>
-                  {/*<Form.Switch type="switch"*/}
-                  {/*             id="aspectratio-switch"*/}
-                  {/*             label="keep aspect ratio"*/}
-                  {/*             checked={config.keepImageAspectRatio}*/}
-                  {/*             onChange={handleKeepImageAspectRatio}*/}
-                  {/*             className="mt-3"*/}
-                  {/*/>*/}
                 </Tab>
                 <Tab eventKey="static" title="Static">
                   <ColorPicker initValue={defaultPlayerConfig.staticColor}
@@ -131,13 +117,6 @@ function Configurator(props:Props) {
               <Card>
                 <Card.Header>Options</Card.Header>
                 <Card.Body>
-                  {/*<Row>*/}
-                  {/*  <Col xs={6}>*/}
-                  {/*    <div className="mb-3"><span className="text-muted">mode:</span> { config.mode }</div>*/}
-                  {/*  </Col>*/}
-                  {/*  <hr/>*/}
-                  {/*</Row>*/}
-
                   <Row>
                     <Col>
                       <div className="mb-2"><span className="text-muted">screen width:</span> { screenWidth }</div>
@@ -156,7 +135,6 @@ function Configurator(props:Props) {
                     <hr/>
                   </Row>
 
-                  {/*<div>viewport/stroke size</div>*/}
                   <Row>
                     <Col xs={12} className="mb-3">
                       <NumberInput label={'stroke'}

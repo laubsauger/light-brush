@@ -18,7 +18,7 @@ function returnFileSize(number:number) {
 
 function FileInput(props:Props) {
   const { onChange } = props;
-  const { screenWidth, screenHeight } = useDimensions();
+  const { screenHeight } = useDimensions();
 
   const [ selectedFile, setSelectedFile ] = useState<any>();
 
@@ -48,7 +48,7 @@ function FileInput(props:Props) {
     };
 
     onChange(loadedImage);
-  }, [ onChange, selectedFile, screenWidth, screenHeight ]);
+  }, [ onChange, selectedFile, screenHeight ]);
 
   return (
     <>
@@ -68,7 +68,6 @@ function FileInput(props:Props) {
                    onLoad={handleLoad}
               />
             </div>
-            {/*<div>File name {file.name}, file size {file.size}.</div>*/}
           </div>
       }
     </>

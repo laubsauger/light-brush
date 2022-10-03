@@ -13,19 +13,6 @@ function Player(props:Props) {
 
   const [ doRender, setDoRender ] = useState(false);
 
-  // wait for configured time, then start render
-  useEffect(() => {
-    const timerBefore = setTimeout(() => setDoRender(true), config.blackoutBeforeDurationSec * 1000);
-
-    return () => {
-      clearTimeout(timerBefore);
-    }
-  }, [ config.blackoutBeforeDurationSec ]);
-
-  useEffect(() => {
-    onStarted();
-  }, [ onStarted ]);
-
   // wait for configured time, then stop render
   const handleStopTap = useCallback(() => {
     setDoRender(false);
@@ -36,11 +23,34 @@ function Player(props:Props) {
     }
   }, [config.blackoutAfterDurationSec, onEnded ]);
 
+  // wait for configured time, then start render
+  useEffect(() => {
+    const timerBefore = setTimeout(() => setDoRender(true), config.blackoutBeforeDurationSec * 1000);
+    let timerStop:any;
+
+    if (config.image && !config.loop) {
+      timerStop = setTimeout(handleStopTap, (config.image?.fitWidth/config.strokeWidth * config.speedMs) + config.blackoutBeforeDurationSec * 1000);
+    }
+
+    return () => {
+      clearTimeout(timerBefore);
+
+      if (timerStop) {
+        clearTimeout(timerStop);
+      }
+    }
+  }, [ config, handleStopTap ]);
+
+  useEffect(() => {
+    onStarted();
+  }, [ onStarted ]);
+
+
   //@todo: for single-run/non-looped stuff: add timer for us to know when the animation is done and we should fade to black and then kill the player
 
   return (
     <div className="Player w-100 h-100 position-fixed d-flex justify-content-center align-items-center"
-         style={{ background: "#000", top: 0, bottom: 0, left: 0, right: 0 }}
+         style={{ background: "#000", top: 0, bottom: 0, left: 0, right: 0, zIndex: 99999, }}
          onClick={handleStopTap}
     >
       { doRender &&
