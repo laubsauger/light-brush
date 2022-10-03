@@ -46,10 +46,7 @@ function Player(props:Props) {
         clearTimeout(timerStop);
       }
     }
-  }, [config]);
-
-
-  //@todo: for single-run/non-looped stuff: add timer for us to know when the animation is done and we should fade to black and then kill the player
+  }, [ config ]);
 
   return (
     <div className="Player w-100 h-100 position-fixed d-flex justify-content-center align-items-center"
